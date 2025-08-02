@@ -1,7 +1,7 @@
 // components/ShoppingCart.js
 
 import { removeFromCart, updateCart } from "../store/cartSlice";
-import Image from "next/image";
+import OptimizedImage from "./OptimizedImage";
 import { useMemo, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
@@ -41,7 +41,14 @@ export default function ShoppingCartItem({ data }) {
       <div className="flex items-center justify-between w-full p-2 gap-4 border-b bg-slate-100 border-gray-300">
          <div className="flex items-center space-x-4">
             <div className="w-20 h-20">
-               <Image src={item.image} alt={item.name} width={80} height={80} />
+               <OptimizedImage
+                  src={item.image}
+                  alt={item.name}
+                  width={80}
+                  height={80}
+                  className="rounded"
+                  fallbackSrc="/placeholder-shoe.svg"
+               />
             </div>
          </div>
          <div className="flex flex-col items-start gap-3 w-full">

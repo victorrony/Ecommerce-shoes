@@ -1,4 +1,4 @@
-import Image from "next/image";
+import OptimizedImage from "./OptimizedImage";
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
@@ -66,32 +66,30 @@ export const CartItem = ({ searchShoes, isOpen, closeModel }) => {
                                     searchShoes.thumbnails ? "md:h-[250px]" : "md:h-[400px]"
                                  }`}
                               >
-                                 <Image
+                                 <OptimizedImage
                                     src={hoveredImage || currentImage}
                                     alt="image"
                                     width={400}
                                     height={400}
                                     className="w-full h-full object-cover"
+                                    fallbackSrc="/placeholder-shoe.svg"
                                  />
                               </div>
                               <div className="flex flex-wrap gap-2  items-center mt-2">
-                                 {searchShoes.thumbnails?.map(
-                                    (thumbnail) => (
-                                       console.log("searchShoes", searchShoes),
-                                       (
-                                          <Image
-                                             key={thumbnail.id}
-                                             src={thumbnail.image}
-                                             alt="thumbnail"
-                                             width={400}
-                                             height={400}
-                                             className="w-[63px] h-14 object-cover mb-6"
-                                             onMouseEnter={() => setHoveredImage(thumbnail.image)} // Atualiza a imagem principal
-                                             onMouseLeave={() => setHoveredImage(null)} // Volta à imagem original
-                                          />
-                                       )
-                                    )
-                                 )}
+                                 {searchShoes.thumbnails?.map((thumbnail) => (
+                                    <OptimizedImage
+                                       key={thumbnail.id}
+                                       src={thumbnail.image}
+                                       alt="thumbnail"
+                                       width={63}
+                                       height={56}
+                                       className="w-[63px] h-14 object-cover mb-6"
+                                       loading="lazy"
+                                       fallbackSrc="/placeholder-shoe.svg"
+                                       onMouseEnter={() => setHoveredImage(thumbnail?.image)}
+                                       onMouseLeave={() => setHoveredImage(null)}
+                                    />
+                                 ))}
                               </div>
                            </div>
                            <div className="w-full flex flex-col md:gap-2 ">
@@ -110,7 +108,7 @@ export const CartItem = ({ searchShoes, isOpen, closeModel }) => {
 
                               <div className="flex items-center gap-2  text-black/[0.5] text-sm md:text-md">
                                  <div className="flex items-center font-bold text-orange-500">
-                                   Color : {searchShoes.color}
+                                    Color : {searchShoes.color}
                                  </div>
                               </div>
 

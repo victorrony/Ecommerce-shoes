@@ -11,7 +11,7 @@ const BannerHero = ({ images }) => {
             infiniteLoop={true}
             showStatus={false}
             interval={5000}
-            showThumbs={false}            
+            showThumbs={false}
             renderArrowPrev={(clickHandler, hasPrev) => (
                <div
                   onClick={clickHandler}
@@ -30,8 +30,14 @@ const BannerHero = ({ images }) => {
             )}
          >
             {images?.map((item, index) => (
-               <div key={index} className="flex md:h-[500px] ">
-                  <img src={item.src} alt={item.alt} className="aspect-[16/10]" />
+               <div key={index} className="relative flex md:h-[500px] h-[300px]">
+                  <img
+                     src={item.src}
+                     alt={item.alt}
+                     className="w-full h-full object-cover"
+                     loading={index === 0 ? "eager" : "lazy"}
+                     fetchpriority={index === 0 ? "high" : "low"}
+                  />
                   {/* <div className="px-[15px] md:px-[40px] py-[10px] md:py-[25px] font-oswald bg-white absolute bottom-[25px] md:bottom-[75px] left-0 text-black/[0.9] text-[15px] md:text-[30px] uppercase font-medium cursor-pointer hover:opacity-90">
                      Shop now
                   </div> */}
